@@ -1,0 +1,9 @@
+C:\Users\Pedro\Desktop\repos\Project1\IACsharp\obj\Debug\IACsharp.csprojAssemblyReference.cache
+C:\Users\Pedro\Desktop\repos\Project1\IACsharp\obj\Debug\IACsharp.Properties.Resources.resources
+C:\Users\Pedro\Desktop\repos\Project1\IACsharp\obj\Debug\IACsharp.csproj.GenerateResource.cache
+C:\Users\Pedro\Desktop\repos\Project1\IACsharp\obj\Debug\IACsharp.csproj.CoreCompileInputs.cache
+C:\Users\Pedro\Desktop\repos\Project1\IACsharp\bin\Debug\IACsharp.exe.config
+C:\Users\Pedro\Desktop\repos\Project1\IACsharp\bin\Debug\IACsharp.exe
+C:\Users\Pedro\Desktop\repos\Project1\IACsharp\bin\Debug\IACsharp.pdb
+C:\Users\Pedro\Desktop\repos\Project1\IACsharp\obj\Debug\IACsharp.exe
+C:\Users\Pedro\Desktop\repos\Project1\IACsharp\obj\Debug\IACsharp.pdb

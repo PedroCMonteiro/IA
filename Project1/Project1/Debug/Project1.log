@@ -1,0 +1,29 @@
+﻿  grafo.c
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(89): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char (*)[22]'
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(89): warning C4024: 'strstr': different types for formal and actual parameter 1
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(93): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char (*)[22]'
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(93): warning C4024: 'strstr': different types for formal and actual parameter 1
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(97): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char (*)[22]'
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(97): warning C4024: 'strstr': different types for formal and actual parameter 1
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(106): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char (*)[15]'
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(106): warning C4024: 'strstr': different types for formal and actual parameter 1
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(110): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char (*)[15]'
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(110): warning C4024: 'strstr': different types for formal and actual parameter 1
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(114): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char (*)[15]'
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(114): warning C4024: 'strstr': different types for formal and actual parameter 1
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(118): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char (*)[15]'
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(118): warning C4024: 'strstr': different types for formal and actual parameter 1
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(122): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char (*)[15]'
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(122): warning C4024: 'strstr': different types for formal and actual parameter 1
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(126): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char (*)[15]'
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(126): warning C4024: 'strstr': different types for formal and actual parameter 1
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(130): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char (*)[15]'
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(130): warning C4024: 'strstr': different types for formal and actual parameter 1
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(134): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char (*)[15]'
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(134): warning C4024: 'strstr': different types for formal and actual parameter 1
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(138): warning C4047: 'function': 'const char *' differs in levels of indirection from 'char (*)[15]'
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(138): warning C4024: 'strstr': different types for formal and actual parameter 1
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(204): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(291): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data
+c:\users\pedro\desktop\repos\project1\project1\grafo.c(351): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Project1.vcxproj -> C:\Users\Pedro\Desktop\repos\Project1\Debug\Project1.exe
