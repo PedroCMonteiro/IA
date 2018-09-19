@@ -31,26 +31,62 @@ struct _sq
 	SQ* prox;
 };
 
-/* funÁıes auxiliares para percurso em largura - ignore inicialmente*/
+/* fun√ß√µes auxiliares para percurso em largura - ignore inicialmente*/
 
 static Viz* criaViz(Viz* head, int noj, float peso)
 {
 	/* insere vizinho no inicio da lista */
-	Viz* no  = (Viz*)malloc(sizeof(Viz));
+	Viz* no = (Viz*)malloc(sizeof(Viz));
 	assert(no);
 
-	if (head != NULL && (peso > head->peso))
+	if (head != NULL)
 	{
-		no = criaViz(head->prox, noj, peso);
-		head->prox = no;
-		//free(no);
+		Viz* l = (Viz*)malloc(sizeof(Viz));
+		assert(l);
+		Viz* no = (Viz*)malloc(sizeof(Viz));
+		assert(no);
+		no->peso = -1;
+		no->noj  = noj;
+		no->prox = NULL;
+		for (l = head; l->prox != NULL && l->peso < peso; l = l->prox)
+		{
+			if (l->prox->peso > peso)
+			{
+				//no->noj  = l->prox->noj;
+				no->peso = peso;
+				no->prox = l->prox;
+				//l->noj = noj;
+				//l->peso = peso;
+				l->prox  = no;
+				break;
+			}
+		}
+		if (no->peso == -1)
+		{ 
+			if (l->peso > peso)
+			{
+				no->noj  = l->noj;
+				no->peso = l->peso;
+				no->prox = l->prox;
+				l->noj   = noj;
+				l->peso  = peso;
+				l->prox  = no;
+			}
+			else
+			{
+				no->peso = peso;
+				no->prox = l->prox;
+				l->prox  = no;
+			}
+		}
+		//no = criaViz(head->prox, noj, peso);
 		return head;
 	}
 	else
 	{
-		no->noj = noj;
+		no->noj  = noj;
 		no->peso = peso;
-		no->prox = head;
+		no->prox = NULL;
 		return no;
 	}
 }
@@ -69,26 +105,28 @@ static Grafo* grafoCria(int nv)
 
 Grafo* grafoLe(char* filename)
 {
-	/* cria grafo n„o orientado - supıe que arquivo est· correto! */
+	/* cria grafo n√£o orientado - sup√µe que arquivo est√° correto! */
 
 	FILE *arq = fopen(filename, "rt");
 
 	if (arq == NULL)
 	{
-		printf("Arquivo n„o encontrado!!");
+		printf("Arquivo nao encontrado!!\t");
 		return NULL;
 	}
 
-	int nv;
+	int numCidades;
 	char dim[22] = "";
 	char format[15] = "";
 	Grafo* novo;
+
+	// ler o cabelha√ßo pegando o formato da matriz e o numero de cidades
 	while (1)
 	{
 		fscanf(arq, "%s", &dim);
 		if (strstr(&dim, "DIMENSION:"))
 		{
-			fscanf_s(arq, "%d", &nv);
+			fscanf_s(arq, "%d", &numCidades);
 		}
 		if (strstr(&dim, "EDGE_WEIGHT_FORMAT:"))
 		{
@@ -100,9 +138,11 @@ Grafo* grafoLe(char* filename)
 		}
 	}
 
-	novo = grafoCria(nv);
+	// aloca o vetor de lista de viz para do tamanho do numero de cidades
+	novo = grafoCria(numCidades);
 	assert(novo);
 
+	// le o arquivo de acordo com o formato pego no cabe√ßalho e insere os dados no grafo
 	if (strstr(&format, "FULL_MATRIX"))
 	{
 		fullMatrix(arq, novo);
@@ -195,7 +235,7 @@ static void profundidade2(Grafo* g, int no, int* check,int pesoAnterior)
 	Viz* l = g->viz[no];
 	if (!check[no])
 	{
-		printf("{No:%d Peso:%d} ", no,soma);
+		//printf("{No:%d Peso:%d} ", no,soma);
 		soma += pesoAnterior;
 		instaciaTotal += soma;
 		check[no] = 1;
@@ -209,16 +249,46 @@ static void profundidade2(Grafo* g, int no, int* check,int pesoAnterior)
 
 void grafoPercorreProfundidade(Grafo *grafo, int no_inicial)
 {
-	/* dica: use uma funÁ„o interna para implementar o percurso em profundidade */
+	/* dica: use uma fun√ß√£o interna para implementar o percurso em profundidade */
+	float** matriz = (float**)calloc(grafo->nv,sizeof(float*));
+	if (matriz == NULL)
+	{
+		printf("Memoria insufiente para matriz");
+		return;
+	}
+	for (int i = 0; i < grafo->nv; i++)
+	{
+		matriz[i] = (float*)calloc(grafo->nv, sizeof(float));
+
+		if(matriz[i] == NULL) 
+		{
+			printf("** Erro: Memoria Insuficiente **");
+			return NULL;
+		}
+	}
+	for (int i = 0; i < grafo->nv; i++)
+	{
+		for (int j = 0; j <= i; j++)
+		{
+			matriz[i][j] = -1;
+			matriz[j][i] = -1;
+		}
+	}
+	for (int i = 0; i < grafo->nv; i++)
+	{
+		for (int j = 0; j < grafo->nv; j++)
+		{
+			printf("Matriz[%d][%d]: %d\n", i, j, matriz[i][j]);
+		}
+	}
 	if (no_inicial < grafo->nv)
 	{
 		soma = 0;
 		instaciaTotal = soma;
 		int cidade, *check = malloc(sizeof(int)*(grafo->nv));
 		for (cidade = 0;cidade < grafo->nv;cidade++) check[cidade] = 0;
-		//check[no_inicial] = 1;
 		profundidade2(grafo, no_inicial, check,0);
-		printf("Total:%d\n",instaciaTotal);
+		printf("%d\n",instaciaTotal);
 		free(check);
 	}
 	else
@@ -261,7 +331,7 @@ static SQ* dequeue(SQ* queue, int* info)
 
 void grafoPercorreLargura(Grafo *grafo, int no_inicial)
 {
-	/* essa funÁ„o deve ser implementada sem recus„o */
+	/* essa fun√ß√£o deve ser implementada sem recus√£o */
 	if (no_inicial < grafo->nv) {
 		int a, j;
 		int soma = 0;
@@ -382,7 +452,7 @@ void fullMatrix  (FILE * arq, Grafo* grafo)
 	}
 }
 			     
-void upperCol(FILE * arq, Grafo* grafo)
+void upperCol	 (FILE * arq, Grafo* grafo)
 {
 	float peso = 0;
 	for (int i = 1;i < grafo->nv ;i++)
@@ -395,8 +465,8 @@ void upperCol(FILE * arq, Grafo* grafo)
 		}
 	}
 }
-			     
-void upperRow(FILE * arq, Grafo* grafo)
+				    
+void upperRow	 (FILE * arq, Grafo* grafo)
 {
 	float peso = 0;
 	for (int i = 0;i < grafo->nv - 1;i++)
@@ -462,17 +532,13 @@ void lowerDiagRow(FILE * arq, Grafo* grafo)
 	{
 		float peso = 0;
 		for (int i = 0;i < grafo->nv;i++)
-		{
-			if (i > 524)
+		{		
+			if (i == 2)
 			{
-				break;
+				int ij = 0;
 			}
 			for (int j = 0;j < i;j++)
-			{
-				if (i == 524 && j == 170)
-				{
-					break;
-				}
+			{				
 				fscanf(arq, "%f", &peso);
 				grafo->viz[i] = criaViz(grafo->viz[i], j, peso);
 				grafo->viz[j] = criaViz(grafo->viz[j], i, peso);
@@ -510,5 +576,3 @@ void lowerRow    (FILE * arq, Grafo* grafo)
 
 	}
 }
-
-Grafo* arvoreCustoMinimo(Grafo *grafo);
